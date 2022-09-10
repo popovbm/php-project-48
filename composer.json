@@ -12,6 +12,9 @@
             "email": "popovbm@gmail.com"
         }
     ],
+    "bin": [
+        "bin/gendiff"
+    ],
     "require": {
         "docopt/docopt": "^1.0"
     }
