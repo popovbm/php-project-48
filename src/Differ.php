@@ -7,8 +7,8 @@ function genDiff($pathToFile1, $pathToFile2)
     $file1 = file_get_contents($pathToFile1);
     $file2 = file_get_contents($pathToFile2);
 
-    $decodeFile1 = json_decode($pathToFile1, true);
-    $decodeFile2 = json_decode($pathToFile2, true);
+    $decodeFile1 = json_decode($file1, true);
+    $decodeFile2 = json_decode($file2, true);
 
     $mergeFiles = array_merge($decodeFile1, $decodeFile2);
 
@@ -38,26 +38,5 @@ function genDiff($pathToFile1, $pathToFile2)
         return implode("\n", $result);
     };
 
-    return $diff($filesKeys);
+    return "{\n{$diff($filesKeys)}\n}";
 }
-
-$doc = <<<DOC
-gendiff -h
-
-Generate diff
-
-Usage:
-  gendiff (-h|--help)
-  gendiff (-v|--version)
-  gendiff [--format <fmt>] <firstFile> <secondFile>
-
-Options:
-  -h --help                     Show this screen
-  -v --version                  Show version
-  --format <fmt>                Report format [default: stylish]
-DOC;
-
-require('../vendor/docopt/docopt/src/docopt.php');
-$args = Docopt::handle($doc, array('version'=>'Naval Fate 2.0'));
-foreach ($args as $k=>$v)
-echo $k.': '.json_encode($v).PHP_EOL;
