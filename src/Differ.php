@@ -4,6 +4,12 @@ namespace gendiff\Differ;
 
 function genDiff($pathToFile1, $pathToFile2)
 {
+    $pathToFile1 = realpath($pathToFile1);
+    $pathToFile2 = realpath($pathToFile2);
+    if (!file_exists($pathToFile1) || !file_exists($pathToFile2)) {
+        return false;
+    }
+
     $file1 = file_get_contents($pathToFile1);
     $file2 = file_get_contents($pathToFile2);
 
@@ -38,5 +44,5 @@ function genDiff($pathToFile1, $pathToFile2)
         return implode("\n", $result);
     };
 
-    return "{\n{$diff($filesKeys)}\n}";
+    echo "{\n{$diff($filesKeys)}\n}";
 }
