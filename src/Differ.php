@@ -29,14 +29,14 @@ function genDiff($pathToFile1, $pathToFile2)
     $diff = function ($keys) use ($decodeFile1, $decodeFile2, $toString) {
         $result = array_reduce($keys, function ($acc, $key) use ($decodeFile1, $decodeFile2, $toString) {
             if (!array_key_exists($key, $decodeFile1)) {
-                $acc[] = "+ {$key}: {$toString($decodeFile2[$key])}";
+                $acc[] = "  + {$key}: {$toString($decodeFile2[$key])}";
             } elseif (!array_key_exists($key, $decodeFile2)) {
-                $acc[] = "- {$key}: {$toString($decodeFile1[$key])}";
+                $acc[] = "  - {$key}: {$toString($decodeFile1[$key])}";
             } elseif ($decodeFile1[$key] === $decodeFile2[$key]) {
-                $acc[] = "  {$key}: {$toString($decodeFile1[$key])}";
+                $acc[] = "    {$key}: {$toString($decodeFile1[$key])}";
             } else {
-                $acc[] = "- {$key}: {$toString($decodeFile1[$key])}";
-                $acc[] = "+ {$key}: {$toString($decodeFile2[$key])}";
+                $acc[] = "  - {$key}: {$toString($decodeFile1[$key])}";
+                $acc[] = "  + {$key}: {$toString($decodeFile2[$key])}";
             }
             return $acc;
         }, []);
@@ -44,5 +44,5 @@ function genDiff($pathToFile1, $pathToFile2)
         return implode("\n", $result);
     };
 
-    echo "{\n{$diff($filesKeys)}\n}";
+    return "{\n{$diff($filesKeys)}\n}";
 }
