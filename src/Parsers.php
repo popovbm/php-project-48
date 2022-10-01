@@ -4,7 +4,6 @@ namespace gendiff\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-
 function parseFile(string $filePath)
 {
     $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
@@ -21,6 +20,4 @@ function parseFile(string $filePath)
             echo 'wrong file format';
             return;
     }
-
-
 }
