@@ -2,19 +2,19 @@
 
 namespace gendiff\Differ;
 
+use function genDiff\Parsers\parseFile;
+
 function genDiff($pathToFile1, $pathToFile2)
 {
     $pathToFile1 = realpath($pathToFile1);
     $pathToFile2 = realpath($pathToFile2);
     if (!file_exists($pathToFile1) || !file_exists($pathToFile2)) {
-        return false;
+        echo 'Some path to file is invalid';
+        return;
     }
 
-    $file1 = file_get_contents($pathToFile1);
-    $file2 = file_get_contents($pathToFile2);
-
-    $decodeFile1 = json_decode($file1, true);
-    $decodeFile2 = json_decode($file2, true);
+    $decodeFile1 = parseFile($pathToFile1);
+    $decodeFile2 = parseFile($pathToFile2);
 
     $mergeFiles = array_merge($decodeFile1, $decodeFile2);
 
