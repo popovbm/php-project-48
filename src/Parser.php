@@ -1,11 +1,23 @@
 <?php
 
-namespace gendiff\Parsers;
+namespace gendiff\Parser;
 
 use Symfony\Component\Yaml\Yaml;
 
+function getRealPath(string $filePath)
+{
+    $realFilePath = realpath($filePath);
+
+    if (!file_exists($realFilePath)) {
+        throw new Exception("{$realFilePath} is invalid file path");
+    }
+
+    return $realFilePath;
+}
+
 function parseFile(string $filePath)
 {
+    $filePath = getRealPath($filePath);
     $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
     $fileContent = file_get_contents($filePath);
 
@@ -13,11 +25,9 @@ function parseFile(string $filePath)
         case 'json':
             return json_decode($fileContent, true);
         case 'yml':
-            return Yaml::parse($fileContent);
         case 'yaml':
             return Yaml::parse($fileContent);
         default:
-            echo 'wrong file format';
-            return;
+            throw new Exception("{$fileExtension} is invalid file format");
     }
 }

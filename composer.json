@@ -7,7 +7,10 @@
         },
         "files": [
             "src/Differ.php",
-            "src/Parsers.php"
+            "src/Parser.php",
+            "src/MakeAst.php",
+            "src/Formatter.php",
+            "src/Formatters/Stylish.php"
         ]
     },
     "authors": [

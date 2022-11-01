@@ -20,8 +20,6 @@ class DifferTest extends TestCase
         $file2 = getFixtureFullPath('/file2.json');
         $result = file_get_contents(getFixtureFullPath('resultPlain.txt'));
 
-        $this->assertFileExists($file1);
-        $this->assertFileExists($file2);
         $this->assertEquals(genDiff($file1, $file2), $result);
     }
 }
