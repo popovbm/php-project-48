@@ -2,7 +2,6 @@
 
 namespace genDiff\MakeAst;
 
-
 function makeNode(string $status, string $key, $value1, $value2 = null)
 {
     return ['status' => $status, 'key' => $key, 'value1' => $value1, 'value2' => $value2];
@@ -48,9 +47,9 @@ function stringify($content)
 {
     $iter = function ($content) use (&$iter) {
         if (!is_array($content)) {
-             if ($content === null) {
-                 return 'null';
-             }
+            if ($content === null) {
+                return 'null';
+            }
             return trim(var_export($content, true), "'");
         }
 
