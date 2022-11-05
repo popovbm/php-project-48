@@ -1,6 +1,6 @@
 <?php
 
-namespace gendiff\Differ;
+namespace Differ\Differ;
 
 use function genDiff\Parser\parseFile;
 use function genDiff\MakeAst\buildAst;
