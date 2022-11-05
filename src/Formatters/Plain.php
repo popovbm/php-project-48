@@ -5,7 +5,16 @@ namespace genDiff\Formatters\Plain;
 function normalizeValue($value)
 {
     if (!is_array($value)) {
-        return $value === 'null' || $value === 'true' || $value === 'false' || (is_numeric($value)) ? $value : "'{$value}'";
+        if ($value === 'null') {
+            return $value;
+        }
+        if ($value === 'true' || $value === 'false') {
+            return $value;
+        }
+        if (is_numeric($value)) {
+            return $value;
+        }
+        return "'{$value}'";
     }
     return "[complex value]";
 }
