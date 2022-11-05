@@ -2,7 +2,7 @@
 
 namespace genDiff\Formatters\Stylish;
 
-function format($astTree, $depth = 0)
+function formatStylish($astTree, $depth = 0)
 {
     $indent = str_repeat('    ', $depth);
 
@@ -10,7 +10,7 @@ function format($astTree, $depth = 0)
 
         ['status' => $status, 'key' => $key, 'value1' => $value, 'value2' => $value2] = $node;
 
-        $normalizeValue1 = (is_array($value)) ? format($value, $depth + 1) : $value;
+        $normalizeValue1 = (is_array($value)) ? formatStylish($value, $depth + 1) : $value;
 
         switch ($status) {
             case 'nested':
@@ -21,7 +21,7 @@ function format($astTree, $depth = 0)
             case 'deleted':
                 return "{$indent}  - {$key}: {$normalizeValue1}";
             case 'changed':
-                $normalizeValue2 = (is_array($value2)) ? format($value2, $depth + 1) : $value2;
+                $normalizeValue2 = (is_array($value2)) ? formatStylish($value2, $depth + 1) : $value2;
                 return "{$indent}  - {$key}: {$normalizeValue1}\n{$indent}  + {$key}: {$normalizeValue2}";
             default:
                 throw new Exception("Unknown node status: {$status}");

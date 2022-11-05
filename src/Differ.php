@@ -4,7 +4,7 @@ namespace gendiff\Differ;
 
 use function genDiff\Parser\parseFile;
 use function genDiff\MakeAst\buildAst;
-use function genDiff\Formatter\formatResult;
+use function genDiff\Formatters\formatResult;
 
 function genDiff($pathToFile1, $pathToFile2, $format = 'stylish')
 {

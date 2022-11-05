@@ -9,8 +9,9 @@
             "src/Differ.php",
             "src/Parser.php",
             "src/MakeAst.php",
-            "src/Formatter.php",
-            "src/Formatters/Stylish.php"
+            "src/Formatters.php",
+            "src/Formatters/Stylish.php",
+            "src/Formatters/Plain.php"
         ]
     },
     "authors": [
