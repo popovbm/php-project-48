@@ -5,7 +5,7 @@ namespace genDiff\Formatters\Plain;
 function normalizeValue($value)
 {
     if (!is_array($value)) {
-        return $value === 'null' || $value === 'true' || $value === 'false' ? $value : "'{$value}'";
+        return $value === 'null' || $value === 'true' || $value === 'false' || is_int($value) ? $value : "'{$value}'";
     }
     return "[complex value]";
 }
