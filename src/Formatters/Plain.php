@@ -10,18 +10,6 @@ function normalizeValue($value)
     return "[complex value]";
 }
 
-function flatten_array(array $items, array $flattened = [])
-{
-    foreach ($items as $item) {
-        if (is_array($item)) {
-            $flattened = flatten_array($item, $flattened);
-            continue;
-        }
-        $flattened[] = $item;
-    }
-    return $flattened;
-}
-
 function formatPlain($astTree, $keyName = '')
 {
     $lines = array_map(function ($node) use ($keyName) {
@@ -48,5 +36,6 @@ function formatPlain($astTree, $keyName = '')
                 throw new Exception("Unknown node status: {$status}");
         }
     }, $astTree);
-    return implode("\n", array_filter(flatten_array($lines)));
+    $filteredResult = array_filter($lines);
+    return implode("\n", $filteredResult);
 }
