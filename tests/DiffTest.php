@@ -14,8 +14,7 @@ class DiffTest extends TestCase
      */
     private function getFixtureFullPath($fixtureName)
     {
-            $parts = [__DIR__, 'fixtures', $fixtureName];
-            return realpath(implode('/', $parts));
+             return __DIR__ . "/fixtures/" . $fixtureName;
     }
 
     /**

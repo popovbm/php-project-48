@@ -12,9 +12,8 @@ use Symfony\Component\Yaml\Yaml;
 function getRealPath(string $filePath)
 {
     $realFilePath = realpath($filePath);
-
-    if (!file_exists($realFilePath)) {
-        throw new \Exception("{$realFilePath} is invalid file path");
+    if ($realFilePath === false) {
+        throw new \Exception("File not exists");
     }
 
     return $realFilePath;
@@ -29,6 +28,9 @@ function parseFile(string $filePath)
     $filePath = getRealPath($filePath);
     $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
     $fileContent = file_get_contents($filePath);
+    if ($fileContent === false) {
+        throw new \Exception("Can't read file");
+    }
 
     switch ($fileExtension) {
         case 'json':

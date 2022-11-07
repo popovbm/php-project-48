@@ -56,9 +56,7 @@ function genAst(string $key, array $contentFile1, array $contentFile2): array
         return makeNode('changed', $key, stringify($value1), stringify($value2));
     }
 
-    if ($value1 === $value2) {
-        return makeNode('unchanged', $key, $value1);
-    }
+    return makeNode('unchanged', $key, $value1);
 }
 
 /**

@@ -4,10 +4,10 @@ namespace Differ\Formatters\Json;
 
 /**
  * @param array<mixed> $astTree
- * @return string
+ * @return mixed
  */
 
-function formatJson(array $astTree): string
+function formatJson(array $astTree)
 {
     return json_encode($astTree);
 }
