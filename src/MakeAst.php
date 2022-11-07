@@ -2,6 +2,8 @@
 
 namespace Differ\MakeAst;
 
+use function Functional\sort;
+
 /**
  * @param string $status
  * @param string $key
@@ -24,9 +26,9 @@ function buildAst(array $contentFile1, array $contentFile2): array
     $file1Keys = array_keys($contentFile1);
     $file2Keys = array_keys($contentFile2);
     $keys = array_unique(array_merge($file1Keys, $file2Keys));
-    sort($keys);
+    $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right));
 
-    return array_map(fn($key) => genAst($key, $contentFile1, $contentFile2), $keys);
+    return array_map(fn($key) => genAst($key, $contentFile1, $contentFile2), $sortedKeys);
 }
 
 /**
