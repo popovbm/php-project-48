@@ -40,14 +40,14 @@ function formatPlain(array $astTree, string $keyName = ''): string
             case 'nested':
                 return formatPlain($value, $newKeyName);
             case 'added':
-                $value = normalizeValue($value);
-                return "Property '{$newKeyName}' was added with value: {$value}";
+                $normalizeValue = normalizeValue($value);
+                return "Property '{$newKeyName}' was added with value: {$normalizeValue}";
             case 'deleted':
                 return "Property '{$newKeyName}' was removed";
             case 'changed':
-                $value = normalizeValue($value);
-                $value2 = normalizeValue($value2);
-                return "Property '{$newKeyName}' was updated. From {$value} to {$value2}";
+                $normalizeValue = normalizeValue($value);
+                $normalizeValue2 = normalizeValue($value2);
+                return "Property '{$newKeyName}' was updated. From {$normalizeValue} to {$normalizeValue2}";
             case 'unchanged':
                 break;
             default:
