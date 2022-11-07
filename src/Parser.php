@@ -25,9 +25,9 @@ function getRealPath(string $filePath)
  */
 function parseFile(string $filePath)
 {
-    $filePath = getRealPath($filePath);
-    $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-    $fileContent = file_get_contents($filePath);
+    $realFilePath = getRealPath($filePath);
+    $fileExtension = pathinfo($realFilePath, PATHINFO_EXTENSION);
+    $fileContent = file_get_contents($realFilePath);
     if ($fileContent === false) {
         throw new \Exception("Can't read file");
     }
