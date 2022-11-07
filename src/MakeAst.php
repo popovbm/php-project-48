@@ -7,7 +7,7 @@ function makeNode(string $status, string $key, $value1, $value2 = null)
     return ['status' => $status, 'key' => $key, 'value1' => $value1, 'value2' => $value2];
 }
 
-function buildAst($contentFile1, $contentFile2)
+function buildAst(array $contentFile1, array $contentFile2)
 {
     $file1Keys = array_keys($contentFile1);
     $file2Keys = array_keys($contentFile2);
@@ -17,7 +17,7 @@ function buildAst($contentFile1, $contentFile2)
     return array_map(fn($key) => genAst($key, $contentFile1, $contentFile2), $keys);
 }
 
-function genAst($key, $contentFile1, $contentFile2)
+function genAst(string $key, array $contentFile1, array $contentFile2)
 {
     $value1 = $contentFile1[$key] ?? null;
     $value2 = $contentFile2[$key] ?? null;

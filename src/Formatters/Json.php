@@ -2,7 +2,7 @@
 
 namespace genDiff\Formatters\Json;
 
-function formatJson($astTree)
+function formatJson(array $astTree): string
 {
     return json_encode($astTree);
 }

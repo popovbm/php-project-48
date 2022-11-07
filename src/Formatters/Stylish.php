@@ -2,7 +2,7 @@
 
 namespace genDiff\Formatters\Stylish;
 
-function formatStylish($astTree, $depth = 0)
+function formatStylish(array $astTree, int $depth = 0): string
 {
     $indent = str_repeat('    ', $depth);
 

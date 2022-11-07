@@ -19,7 +19,7 @@ function normalizeValue($value)
     return "[complex value]";
 }
 
-function formatPlain($astTree, $keyName = '')
+function formatPlain(array $astTree, string $keyName = ''): string
 {
     $lines = array_map(function ($node) use ($keyName) {
 

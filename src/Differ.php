@@ -6,7 +6,7 @@ use function genDiff\Parser\parseFile;
 use function genDiff\MakeAst\buildAst;
 use function genDiff\Formatters\formatResult;
 
-function genDiff($pathToFile1, $pathToFile2, $format = 'stylish')
+function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
     $file1Content = parseFile($pathToFile1);
     $file2Content = parseFile($pathToFile2);

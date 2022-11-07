@@ -6,7 +6,7 @@ use function genDiff\Formatters\Stylish\formatStylish;
 use function genDiff\Formatters\Plain\formatPlain;
 use function genDiff\Formatters\Json\formatJson;
 
-function formatResult($astTree, $format)
+function formatResult(array $astTree, string $format): string
 {
     switch ($format) {
         case 'stylish':
