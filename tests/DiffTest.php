@@ -8,12 +8,19 @@ use function Differ\Differ\genDiff;
 
 class DiffTest extends TestCase
 {
+    /**
+     * @param string $fixtureName
+     * @return string
+     */
     private function getFixtureFullPath($fixtureName)
     {
             $parts = [__DIR__, 'fixtures', $fixtureName];
             return realpath(implode('/', $parts));
     }
 
+    /**
+     * @return array<string>
+     */
     private function getFullPaths()
     {
         $fileJson = $this->getFixtureFullPath('/file1.json');

@@ -1,20 +1,29 @@
 <?php
 
-namespace gendiff\Parser;
+namespace Differ\Parser;
 
 use Symfony\Component\Yaml\Yaml;
+
+/**
+ * @param string $filePath
+ * @return string
+ */
 
 function getRealPath(string $filePath)
 {
     $realFilePath = realpath($filePath);
 
     if (!file_exists($realFilePath)) {
-        throw new Exception("{$realFilePath} is invalid file path");
+        throw new \Exception("{$realFilePath} is invalid file path");
     }
 
     return $realFilePath;
 }
 
+/**
+ * @param string $filePath
+ * @return array<mixed>
+ */
 function parseFile(string $filePath)
 {
     $filePath = getRealPath($filePath);
@@ -28,6 +37,6 @@ function parseFile(string $filePath)
         case 'yaml':
             return Yaml::parse($fileContent);
         default:
-            throw new Exception("{$fileExtension} is invalid file format");
+            throw new \Exception("{$fileExtension} is invalid file format");
     }
 }

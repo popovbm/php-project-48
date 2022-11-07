@@ -1,13 +1,25 @@
 <?php
 
-namespace genDiff\MakeAst;
+namespace Differ\MakeAst;
 
+/**
+ * @param string $status
+ * @param string $key
+ * @param mixed $value1
+ * @param mixed $value2
+ * @return array<mixed>
+ */
 function makeNode(string $status, string $key, $value1, $value2 = null)
 {
     return ['status' => $status, 'key' => $key, 'value1' => $value1, 'value2' => $value2];
 }
 
-function buildAst(array $contentFile1, array $contentFile2)
+/**
+ * @param array<mixed> $contentFile1
+ * @param array<mixed> $contentFile2
+ * @return array<mixed>
+ */
+function buildAst(array $contentFile1, array $contentFile2): array
 {
     $file1Keys = array_keys($contentFile1);
     $file2Keys = array_keys($contentFile2);
@@ -17,7 +29,13 @@ function buildAst(array $contentFile1, array $contentFile2)
     return array_map(fn($key) => genAst($key, $contentFile1, $contentFile2), $keys);
 }
 
-function genAst(string $key, array $contentFile1, array $contentFile2)
+/**
+ * @param string $key
+ * @param array<mixed> $contentFile1
+ * @param array<mixed> $contentFile2
+ * @return array<mixed>
+ */
+function genAst(string $key, array $contentFile1, array $contentFile2): array
 {
     $value1 = $contentFile1[$key] ?? null;
     $value2 = $contentFile2[$key] ?? null;
@@ -43,6 +61,10 @@ function genAst(string $key, array $contentFile1, array $contentFile2)
     }
 }
 
+/**
+ * @param mixed $content
+ * @return mixed
+ */
 function stringify($content)
 {
     $iter = function ($content) use (&$iter) {

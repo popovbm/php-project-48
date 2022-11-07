@@ -1,7 +1,11 @@
 <?php
 
-namespace genDiff\Formatters\Plain;
+namespace Differ\Formatters\Plain;
 
+/**
+ * @param mixed $value
+ * @return mixed
+ */
 function normalizeValue($value)
 {
     if (!is_array($value)) {
@@ -19,6 +23,11 @@ function normalizeValue($value)
     return "[complex value]";
 }
 
+ /**
+ * @param array<mixed> $astTree
+ * @param string $keyName
+ * @return string
+ */
 function formatPlain(array $astTree, string $keyName = ''): string
 {
     $lines = array_map(function ($node) use ($keyName) {
@@ -42,7 +51,7 @@ function formatPlain(array $astTree, string $keyName = ''): string
             case 'unchanged':
                 break;
             default:
-                throw new Exception("Unknown node status: {$status}");
+                throw new \Exception("Unknown node status: {$status}");
         }
     }, $astTree);
     $filteredResult = array_filter($lines);

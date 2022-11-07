@@ -1,7 +1,12 @@
 <?php
 
-namespace genDiff\Formatters\Stylish;
+namespace Differ\Formatters\Stylish;
 
+ /**
+ * @param array<mixed> $astTree
+ * @param int $depth
+ * @return string
+ */
 function formatStylish(array $astTree, int $depth = 0): string
 {
     $indent = str_repeat('    ', $depth);
@@ -24,7 +29,7 @@ function formatStylish(array $astTree, int $depth = 0): string
                 $normalizeValue2 = (is_array($value2)) ? formatStylish($value2, $depth + 1) : $value2;
                 return "{$indent}  - {$key}: {$normalizeValue1}\n{$indent}  + {$key}: {$normalizeValue2}";
             default:
-                throw new Exception("Unknown node status: {$status}");
+                throw new \Exception("Unknown node status: {$status}");
         }
     }, $astTree);
     $result = ["{", ...$lines, "{$indent}}"];
