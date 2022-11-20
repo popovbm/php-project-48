@@ -14,40 +14,67 @@ class DiffTest extends TestCase
      */
     private function getFixtureFullPath($fixtureName)
     {
-             return __DIR__ . "/fixtures/" . $fixtureName;
+        return __DIR__ . "/fixtures/" . $fixtureName;
     }
 
     /**
-     * @return array<string>
+     * @dataProvider mainProvider
+     * @param string $file1
+     * @param string $file2
+     * @param string $expectedResult
+     * @param string $format
+     * @return void
      */
-    private function getFullPaths()
+    public function testTwoGendiffs($file1, $file2, $format, $expectedResult)
     {
-        $fileJson = $this->getFixtureFullPath('/file1.json');
-        $fileYml = $this->getFixtureFullPath('/file2.yml');
-        return [$fileJson, $fileYml];
+        $fixture1 = $this->getFixtureFullPath($file1);
+        $fixture2 = $this->getFixtureFullPath($file2);
+        $diffResult = file_get_contents($this->getFixtureFullPath($expectedResult));
+        $this->assertEquals(genDiff($fixture1, $fixture2, $format), $diffResult);
     }
 
-    public function testStylish(): void
+    /**
+     * @return array<int, array<int, string>>
+     */
+    public function mainProvider()
     {
-        $expectedResult = file_get_contents($this->getFixtureFullPath('resultStylish.txt'));
-        [$fileJson, $fileYml] = $this->getFullPaths();
-
-        $this->assertEquals(genDiff($fileJson, $fileYml), $expectedResult);
-    }
-
-    public function testPlain(): void
-    {
-        $expectedResult = file_get_contents($this->getFixtureFullPath('resultPlain.txt'));
-        [$fileJson, $fileYml] = $this->getFullPaths();
-
-        $this->assertEquals(genDiff($fileJson, $fileYml, 'plain'), $expectedResult);
-    }
-
-    public function testJson(): void
-    {
-        $expectedResult = file_get_contents($this->getFixtureFullPath('resultJson.txt'));
-        [$fileJson, $fileYml] = $this->getFullPaths();
-
-        $this->assertEquals(genDiff($fileJson, $fileYml, 'json'), $expectedResult);
+        return [
+            [
+                'file1.json',
+                'file2.json',
+                'stylish',
+                'resultStylish.txt'
+            ],
+            [
+                'file1.yml',
+                'file2.yml',
+                'stylish',
+                'resultStylish.txt'
+            ],
+            [
+                'file1.json',
+                'file2.json',
+                'plain',
+                'resultPlain.txt'
+            ],
+            [
+                'file1.yml',
+                'file2.yml',
+                'plain',
+                'resultPlain.txt'
+            ],
+            [
+                'file1.json',
+                'file2.json',
+                'json',
+                'resultJson.txt'
+            ],
+            [
+                'file1.yml',
+                'file2.yml',
+                'json',
+                'resultJson.txt'
+            ],
+        ];
     }
 }
